@@ -1,5 +1,5 @@
-/* Imię nazwisko: Maksymilian Debeściak
- * Numer indeksu: 999999
+/* Imię nazwisko: Maksymilian Polarczyk
+ * Numer indeksu: 300791
  *
  * Oświadczam, że:
  *  - rozwiązanie zadania jest mojego autorstwa,
@@ -13,7 +13,8 @@
  *
  * Q: Co się stanie, jeśli główny proces nie podejmie się roli żniwiarza?
  * A: jak za główny proces rozumiemy init, to jak jest ustawione PR_SET_CHILD_SUBREAPER 
- * to przejmie go pierwszy ancestor który ma ustawione PR_SET_CHILD_SUBREAPER.
+ * to przejmie go pierwszy ancestor który ma ustawione PR_SET_CHILD_SUBREAPER. Jeśli przez
+ * główny proces rozumiemy proces który wywoał forka, to ojcem stanie się proces init.
  * 
  */
 
