@@ -37,9 +37,6 @@ int main(int argc, const char* argv[]) {
         exit(EXIT_SUCCESS);  // needed for wait in parent
     }
 
-    if (pid == 0)  // child
-        exit(EXIT_SUCCESS);
-
     if (argc > 1 && strcmp(argv[1], "--bury") == 0) {  // ignore SIGCHLD
         struct sigaction sa;
         sa.sa_handler = SIG_IGN; // fake ignore handler for SIGCHLD
@@ -48,6 +45,9 @@ int main(int argc, const char* argv[]) {
             exit(1);
         };
     }
+
+    if (pid == 0)  // child
+        exit(EXIT_SUCCESS);
 
     sleep(1);  // fix for 'Signal 17 (CHLD) caught by ps (3.3.12).
                // ps:ps/display.c:66: please report this bug'
