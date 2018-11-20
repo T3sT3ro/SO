@@ -60,12 +60,14 @@ static void func_1() {
         while (!(eof = !read(STDIN_FILENO, &buf[++it], 1)) && !isspace(buf[it]))
             ;
         buf[it] = '\0';  // assure the string is null terminated
-        //printf("[%s](%d)<%d>\n", buf, it, eof ? 1 : 0);
-        words++;
-        if (!eof) swapcontext(&uctx_f1, &uctx_f2);
+        // printf("[%s](%d)<%d>\n", buf, it, eof ? 1 : 0);
+        if (buf[0] != '\0') { // eliminate 0 length words
+            words++;
+            if (!eof) swapcontext(&uctx_f1, &uctx_f2);
+        }
     }
 
-    fprintf(stderr, "words = %d\n", --words);
+    fprintf(stderr, "words = %d\n", words);
     swapcontext(&uctx_f1, &uctx_f2);
 }
 
@@ -80,8 +82,8 @@ static void func_2() {
             else
                 removed++;
         }
-        buf[place_it] = '\0'; // assure the string is \0 terminated
-        //printf("[%s](%d)(%d)<%d>\n", buf, place_it, seek_it, eof ? 1 : 0);
+        buf[place_it] = '\0';  // assure the string is \0 terminated
+        // printf("[%s](%d)(%d)<%d>\n", buf, place_it, seek_it, eof ? 1 : 0);
         swapcontext(&uctx_f2, &uctx_f3);
     }
 
@@ -95,9 +97,8 @@ static void func_3() {
         int i = -1;
         while (buf[++i] != '\0') chars++;
         buf[i] = '\n';  // string is now \n terminated
-        if (!write(STDOUT_FILENO, &buf, i + 1))
-            exit(EXIT_FAILURE);
-        //printf("[%s](%d)<%d>\n", buf, i, eof ? 1 : 0);
+        if (!write(STDOUT_FILENO, &buf, i + 1)) exit(EXIT_FAILURE);
+        // printf("[%s](%d)<%d>\n", buf, i, eof ? 1 : 0);
         memset(buf, 0, 255);
 
         swapcontext(&uctx_f3, &uctx_f1);
