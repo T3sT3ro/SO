@@ -67,7 +67,7 @@ static void func_1() {
         }
     }
 
-    fprintf(stderr, "words = %d\n", words);
+    fprintf(stderr, "\nwords = %d\n", words);
     swapcontext(&uctx_f1, &uctx_f2);
 }
 
@@ -96,8 +96,9 @@ static void func_3() {
     while (!eof) {
         int i = -1;
         while (buf[++i] != '\0') chars++;
-        buf[i] = '\n';  // string is now \n terminated
-        if (!write(STDOUT_FILENO, &buf, i + 1)) exit(EXIT_FAILURE);
+        buf[i] = ' ';  // string is now ' ' terminated
+        // eliminate filtered out words
+        if (buf[0] != ' ' && !write(STDOUT_FILENO, &buf, i + 1)) exit(EXIT_FAILURE);
         // printf("[%s](%d)<%d>\n", buf, i, eof ? 1 : 0);
         memset(buf, 0, 255);
 
