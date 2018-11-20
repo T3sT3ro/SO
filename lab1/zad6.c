@@ -1,5 +1,5 @@
-/* Imię nazwisko: Maksymilian Debeściak
- * Numer indeksu: 999999
+/* Imię nazwisko: Maksymilian Polarczyk
+ * Numer indeksu: 300791
  *
  * Oświadczam, że:
  *  - rozwiązanie zadania jest mojego autorstwa,

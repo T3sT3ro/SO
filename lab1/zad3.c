@@ -11,26 +11,6 @@
  * zmienimy kontekstu manualnie.
  */
 
-/*
-Zadanie 3 (2). Korzystając z rodziny procedur makecontext(3) utwórz
-współprogramy (ang. coroutines)  realizujące następujące funkcje:
-1. Pobierz z «stdin» słowo oddzielone spacjami. Zliczaj ilość pobranych słów.
-Przełącz na #2.
-2. Zlicz i usuń ze słowa znaki niebędące znakami alfanumerycznymi isalnum(3).
-Przełącz na #3.
-3. Wydrukuj słowo na «stdout». Zliczaj znaki w słowach. Przełącz na #1.
-
-Kiedy współprogram #1 natrafi na koniec pliku pozostałe współprogramy mają
-wydrukować wartość liczników, po czym proces ma zakończyć swe działanie.
-
-Stan programu możesz przechowywać w zmiennych globalnych – nie musisz martwić
-się synchronizacją. Możesz założyć, że na wejściu pojawiają się tylko znaki
-ASCII i żadne słowo nie jest dłuższe niż 255 bajtów. Dane należy wczytywać i
-zapisywać odpowiednio wywołaniami read(2) i write(2). Zawartość liczników należy
-wydrukować na «stderr» z użyciem funkcji printf(2).
-
-*/
-
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,10 +35,14 @@ static int eof = false;
 static void func_1() {
     static int words = 0;
     // generating read for each char is not very optimal but welp ¯\_(ツ)_/¯...
+    // still better than logics of eating 1,5 of words and than shifting etc.
     while (!eof) {
         int it = -1;  // buffer iterator
-        while (!(eof = !read(STDIN_FILENO, &buf[++it], 1)) && !isspace(buf[it]))
+        int consumed = 0;
+        while ((consumed = read(STDIN_FILENO, &buf[++it], 1)) > 0 && !isspace(buf[it]))
             ;
+        if (consumed < 0) handle_error("reader read error");
+        eof = !consumed;
         buf[it] = '\0';  // assure the string is null terminated
         // printf("[%s](%d)<%d>\n", buf, it, eof ? 1 : 0);
         if (buf[0] != '\0') { // eliminate 0 length words
@@ -108,8 +92,9 @@ static void func_3() {
     fprintf(stderr, "chars = %d\n", chars);
 }
 
+#define STSZ 16384
 int main() {
-    char f1_stack[16384], f2_stack[16384], f3_stack[16384];
+    char f1_stack[STSZ], f2_stack[STSZ], f3_stack[STSZ];
 
     if (getcontext(&uctx_f1) == -1) handle_error("getcontext");
 
@@ -127,7 +112,7 @@ int main() {
     if (getcontext(&uctx_f3) == -1) handle_error("getcontext");
     uctx_f3.uc_stack.ss_sp = f3_stack;
     uctx_f3.uc_stack.ss_size = sizeof(f3_stack);
-    uctx_f3.uc_link = &uctx_f1;
+    uctx_f3.uc_link = &uctx_f1; // repeat untill eof
     makecontext(&uctx_f3, func_3, 0);
 
     if (swapcontext(&uctx_main, &uctx_f1) == -1) handle_error("swapcontext");

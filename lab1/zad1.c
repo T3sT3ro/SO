@@ -13,14 +13,6 @@
  * executing.
  */
 
-// man(x) x:1=general 2=syscalls 3=C_lib_funcs 4=special_files 7=miscelanous
-/*
-Zadanie 1. Napisz program, który utworzy proces zombie. Należy wskazać nieumarły
-proces potomny uruchamiając polecenie «ps» z użyciem wywołań fork(2) i
-execve(2), a następnie zakończyć cały program. Jeśli użytkownik przekaże
-parametr «--bury» do programu, to należy zapobiec powstawaniu zombie, tj.
-zignorować sygnał SIGCHLD z użyciem sigaction(2).
-*/
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
