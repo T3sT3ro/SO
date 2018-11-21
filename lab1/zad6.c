@@ -18,6 +18,17 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+void * lib_handle;
+
 int main(void) {
+  lib_handle = dlopen("libmystr.so", RTLD_LAZY);
+  if(!lib_handle){
+    fprintf(stderr, "Error while opening libmystr.so: %s\n", dlerror());
+    exit(EXIT_FAILURE);
+  }
+  char * buf[512], *set[128];
+  scanf("%s %s", &buf, &set);
+
+  printf("%d, %s", dlsym(lib_handle, "strdrop")(buf, "sens"), buf);
   return EXIT_SUCCESS;
 }
