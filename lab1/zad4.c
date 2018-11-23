@@ -12,6 +12,9 @@
  * kod błędu z write = EPIPE.
  */
 
+/*
+    Program pobiera dane z wejścia do znaku EOF(^D)
+*/
 #include <ctype.h>
 #include <signal.h>
 #include <stdio.h>

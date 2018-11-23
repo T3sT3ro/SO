@@ -3,6 +3,8 @@
         "ctype.h": "c",
         "signal.h": "c",
         "string.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "fcntl.h": "c",
+        "wait.h": "c"
     }
 }
