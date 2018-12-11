@@ -5,6 +5,7 @@
         "string.h": "c",
         "stdio.h": "c",
         "fcntl.h": "c",
-        "wait.h": "c"
+        "wait.h": "c",
+        "stdlib.h": "c"
     }
 }
