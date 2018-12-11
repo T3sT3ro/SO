@@ -37,10 +37,4 @@ void sem_post(sem_t* sem) {
     assert(pthread_mutex_unlock(&sem->mutex) == 0);
 }
 
-void sem_getvalue(sem_t* sem, int* sval) {
-    // is this mutex lock even needed ???
-    int err = 0;
-    assert(!(err = pthread_mutex_lock(&sem->mutex)) || err == EBUSY);
-    *sval = sem->value;
-    assert(pthread_mutex_unlock(&sem->mutex) == 0);
-}
+void sem_getvalue(sem_t* sem, int* sval) { *sval = sem->value; }

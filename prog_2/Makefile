@@ -5,7 +5,7 @@ CFLAGS = -Og -std=gnu11 -Wall -Wextra -Wno-unused-parameter -Wno-unused-function
 all: zad1 zad2 zad8
 
 zad1: zad1.c semaphore.c
-zad2: zad2.c
+zad2: zad2.c semaphore.c
 zad8: zad8.c semaphore.c
 	$(CC) $(CFLAGS) -o $@ $^ -ldl
 
