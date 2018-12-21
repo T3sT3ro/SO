@@ -1,3 +1,6 @@
+#ifndef SEMAPHORE_H
+#define SEMAPHORE_H
+
 #define _GNU_SOURCE // comment out if not working xD
 #include <pthread.h>
 #include <stdlib.h>
@@ -13,3 +16,5 @@ void sem_init(sem_t* sem, unsigned value);
 void sem_wait(sem_t* sem);
 void sem_post(sem_t* sem);
 void sem_getvalue(sem_t* sem, int *sval);
+
+#endif // SEMAPHORE_H
