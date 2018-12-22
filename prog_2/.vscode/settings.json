@@ -3,6 +3,8 @@
         "pthread.h": "c",
         "semaphore.h": "c",
         "unistd.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "stdbool.h": "c",
+        "cstdbool": "c"
     }
 }
