@@ -98,5 +98,6 @@ int main() {
     sigwait(&set, &err);
     for (int i = 0; i < CNT; i++) pthread_cancel(philosophers[i]);
     for (int i = 0; i < CNT; i++) pthread_join(philosophers[i], NULL);
+    pthread_mutex_destroy(&critsec);
     exit(EXIT_SUCCESS);
 }
