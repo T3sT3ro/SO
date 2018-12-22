@@ -6,8 +6,9 @@
 #include "semaphore.h"
 
 #define NDEBUG   // udefine to enable testing
-#ifndef NDEBUG
 #include <assert.h>
+#ifndef NDEBUG
+static int inside_critsec = 0;
 #endif
 
 // it's called the barbershop problem...
@@ -62,20 +63,11 @@ void* client_lifecycle(void* data) {
         sem_post(&customer);
         sem_wait(&barber);
 
-#ifndef NDEBUG
-        static int inside_critsec = 0;
-        inside_critsec++;
-        assert(inside_critsec == 1);
-#endif
-
+        assert(++inside_critsec == 1);
         id_send_msg(id, _cut);
         delay(DELAYSCALE);
         id_send_msg(id, _sweet);
-
-#ifndef NDEBUG
-        assert(inside_critsec == 1);
-        inside_critsec--;
-#endif
+        assert(inside_critsec-- == 1);
 
         sem_wait(&hair_cut);
 
@@ -103,5 +95,5 @@ int main() {
     }
 
     pthread_join(pbarber, NULL);  // brutal end with ^C, the signal mask and handler
-    return 0;                     // would be the same as in the 8th task
+    return 0;                     // would be the same as in the 2nd task
 }
