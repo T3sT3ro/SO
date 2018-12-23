@@ -1,7 +1,6 @@
 #include "semaphore.h"
 #include <assert.h>
 #include <errno.h>
-#define ASSERT()
 
 void sem_init(sem_t* sem, unsigned value) {
     sem->value = value;
