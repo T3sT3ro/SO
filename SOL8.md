@@ -1,4 +1,4 @@
-# Lista 6
+# Lista 8
 
 **Zadanie 1.** Podaj w pseudokodzie semantykę **instrukcji atomowej** compare-and-swap i z jej użyciem zaimplementuj **blokadę wirującą** (ang. spin-lock). W jakich systemach komputerowych stosuje się ten typ blokad? Wymień zalety i wady blokad wirujących w porównaniu do **blokad usypiających**. Opisz rozwiązanie pośrednie, czyli **blokady adaptacyjne**.
 
