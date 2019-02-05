@@ -104,10 +104,11 @@ Wywalamy ramkę `C` bo ma najmniejszy licznik. Wartość licznika nowej strony t
 ---
 
 **Zadanie 7**. Na podstawie artykułu [A Simple and Effective Algorithm for Virtual Memory Management](https://goo.gl/fKta9r) opisz działanie algorytmu WSClock. Kiedy zleca strony do **wyczyszczenia**? Rozważmy przykład z obrazu 3-20(c) w podręczniku Tanenbaum. Ramię zegara wskazuje na stronę ze znacznikiem czasowym `1213` i wyzerowanym bitem R. Która ze stron zostanie zastąpiona, jeśli `τ = 400`, a która jeśli `τ = 1000`?
+> UWAGA! Opis algorytmu z podręcznika Tanenbaum zawiera błędy – proszę przeczytać zamieszczony artykuł.
 
 ---
 
-> UWAGA! Opis algorytmu z podręcznika Tanenbaum zawiera błędy – proszę przeczytać zamieszczony artykuł.
+[Dobry opis algorytmu](https://cs.nyu.edu/courses/spring02/V22.0202-002/wsclock.html)
 
 ![schemat blokowy WSClock](https://i.imgur.com/50nCg40.png)
 
