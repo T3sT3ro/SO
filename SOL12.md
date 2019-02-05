@@ -16,7 +16,7 @@
 
 ---
 
-    [pdf by MBa](https://docdro.id/j345P2D)
+[pdf by MBa](https://docdro.id/j345P2D)
 
 ---
 
