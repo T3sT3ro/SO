@@ -83,6 +83,8 @@ Błąd przy zapisie może wystapić gdy jest współdzielony i w tym samym czasi
 
 * ***druga szansa***: Modyfikacja FIFO korzystająca z bitów `R`(reference) i `M`(modified). Przed usunięciem patrzy na bit `R`. Jeśli był `0` to wywala i albo pisze na dysk(`M==1`) albo porzuca(`M==0`), a jeśli `1` to dodaje na poczatek kolejki i czyści `R`. Jeśli wszystkie były `R==1` to degeneruje się do FIFO. Dla przykładu z treści zadania, czyli stron `B C D E F G H A` w tej kolejności pierwszą wywaloną będzie strona `D`
 
+![tanenbaum 3-15(b)](https://i.imgur.com/ps581BF.png)
+
 ---
 
 **Zadanie 6**. Rozważmy komputer podobny do [MERA-400](https://mera400.pl/) posiadający tylko 4 ramki o rozmiarze 4KiB. W pierwszym takcie zegara systemowego bity R ramek są ustawione zgodnie z bitami w ciągu 0111. W kolejnych taktach zegarowych zarejestrowano wartości bitów: 1011, 1010, 1101, 0010, 1010, 1100 i 0001. Używamy **algorytmu postarzania stron** z 8-bitowymi licznikami. Oblicz wartości liczników dla ostatniego taktu zegara systemowego. Następnie proces wywołuje błąd strony – wybierz ramkę ofiarę. Jaka będzie wartość licznika dla nowo wstawionej ramki?
